@@ -24,6 +24,7 @@ const path = {
     scss: `src/scss/main.scss`,
     js: `src/js/main.js`,
     img: `src/img/**/*`,
+    video: `src/video/**/*`,
     fonts: `src/fonts/**/*`,
     favicon: `src/favicon/**/*`,
     libs: `src/libs/**/*`
@@ -33,6 +34,7 @@ const path = {
     css: `${dist}/css`,
     js: `${dist}/js`,
     img: `${dist}/img`,
+    video: `${dist}/video`,
     fonts: `${dist}/fonts`,
     favicon: `${dist}/favicon`,
     libs: `${dist}/libs`
@@ -64,6 +66,13 @@ const webpackConfig = {
           name: `../assets/[name].[ext]`,
           publicPath: dist
         }
+      }, {
+        test: /\.(frag|vert|glsl)$/,
+        use: [
+          {
+            loader: 'glsl-shader-loader'
+          }
+        ]
       }
     ]
   },
@@ -140,6 +149,12 @@ task(`img`, () =>
     .pipe(browserSync.stream())
 )
 
+task(`video`, () =>
+  src(path.src.video)
+    .pipe(dest(path.dist.video))
+    .pipe(browserSync.stream())
+)
+
 task(`fonts`, () =>
   src(path.src.fonts)
     .pipe(dest(path.dist.fonts))
@@ -173,6 +188,7 @@ task(`watch`, () => {
   watch(path.watch.scss, series(`scss`))
   watch(path.watch.js, series(`js`))
   watch(path.src.img, series(`img`))
+  watch(path.src.video, series(`video`))
   watch(path.src.fonts, series(`fonts`))
   watch(path.src.favicon, series(`favicon`))
   watch(path.src.libs, series(`libs`))
