@@ -27,7 +27,8 @@ const path = {
     video: `src/video/**/*`,
     fonts: `src/fonts/**/*`,
     favicon: `src/favicon/**/*`,
-    libs: `src/libs/**/*`
+    libs: `src/libs/**/*`,
+    shaders: `src/**/*.{frag, vert}`
   },
   dist: {
     html: dist,
@@ -187,6 +188,7 @@ task(`watch`, () => {
   watch(path.watch.html, series(`html`))
   watch(path.watch.scss, series(`scss`))
   watch(path.watch.js, series(`js`))
+  watch(path.src.shaders, series(`js`))
   watch(path.src.img, series(`img`))
   watch(path.src.video, series(`video`))
   watch(path.src.fonts, series(`fonts`))
