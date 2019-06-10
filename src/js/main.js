@@ -24,6 +24,8 @@ function getMouseXY (e) {
   uniforms.u_mouse.value.y = mouse.y
 }
 
+
+
 function init () {
   container = document.getElementById('container')
 
@@ -31,7 +33,8 @@ function init () {
   camera.position.z = 1
   scene = new THREE.Scene()
   let geometry = new THREE.PlaneBufferGeometry(2, 2)
-  // let MyTexture = loader.load('img/foto.jpg')
+  let MyTexture = loader.load(require('../img/water.jpg'))
+  console.log(MyTexture)
   uniforms = {
     u_time: {
       type: 'f',
@@ -48,16 +51,16 @@ function init () {
     u_resolution: {
       type: 'v2',
       value: new THREE.Vector2()
-    }
-    // u_size: {
-    //   type: 'v2',
-    //   value: new THREE.Vector2(MyTexture.image.width, MyTexture.image.height)
-    // },
-    // texture: {
-    //   value: MyTexture
-    // },
+    },
+    u_size: {
+      type: 'v2',
+      value: new THREE.Vector2(MyTexture.image.width, MyTexture.image.height)
+    },
+    texture: {
+      value: MyTexture
+    },
     // map: {
-    //   value: loader.load('img/popkamap.jpg')
+    //   value: loader.load('../img/water.jpg')
     // }
   }
   let material = new THREE.ShaderMaterial({
