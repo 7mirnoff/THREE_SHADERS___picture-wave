@@ -14,8 +14,12 @@ let mouse = {
 let loader = new THREE.TextureLoader()
 document.onmousemove = getMouseXY
 
-init()
-animate()
+const startRender = () => {
+  init()
+  animate()
+}
+
+let MyTexture = loader.load('../img/water.jpg', startRender)
 
 function getMouseXY (e) {
   mouse.x = e.pageX
@@ -24,8 +28,6 @@ function getMouseXY (e) {
   uniforms.u_mouse.value.y = mouse.y
 }
 
-
-
 function init () {
   container = document.getElementById('container')
 
@@ -33,8 +35,7 @@ function init () {
   camera.position.z = 1
   scene = new THREE.Scene()
   let geometry = new THREE.PlaneBufferGeometry(2, 2)
-  let MyTexture = loader.load(require('../img/water.jpg'))
-  console.log(MyTexture)
+
   uniforms = {
     u_time: {
       type: 'f',
@@ -63,11 +64,13 @@ function init () {
     //   value: loader.load('../img/water.jpg')
     // }
   }
+
   let material = new THREE.ShaderMaterial({
     uniforms: uniforms,
     vertexShader: vertexShader,
     fragmentShader: fragmentShader
   })
+
   let mesh = new THREE.Mesh(geometry, material)
   scene.add(mesh)
   renderer = new THREE.WebGLRenderer()
