@@ -60,9 +60,9 @@ function init () {
     texture: {
       value: MyTexture
     },
-    // map: {
-    //   value: loader.load('../img/water.jpg')
-    // }
+    map: {
+      value: loader.load('../img/water-map.jpg')
+    }
   }
 
   let material = new THREE.ShaderMaterial({

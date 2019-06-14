@@ -8,7 +8,12 @@ void main() {
   scaley = u_size.y / (u_resolution.y);
   vUv.x = vUv.x / scalex;
   vUv.y = vUv.y / scaley;
-  // vUv = uv;
-  // gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-  gl_Position = vec4(position, 1.0);
+
+  // растягивает изоюражение на весь экран
+  vUv = uv;
+  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+  // сохранет пропорции изображения
+  // gl_Position = vec4(position, 1.0);
 }
+

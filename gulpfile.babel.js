@@ -28,7 +28,7 @@ const path = {
     fonts: `src/fonts/**/*`,
     favicon: `src/favicon/**/*`,
     libs: `src/libs/**/*`,
-    shaders: `src/**/*.{frag, vert}`
+    shaders: `src/**/*.{frag,vert}`
   },
   dist: {
     html: dist,

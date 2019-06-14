@@ -20,8 +20,18 @@ void main() {
   // gl_FragColor = vec4( vec3(1.0, 0.0, 1.0), 1.0);
   // ===== складывание векторов конец =====
 
-  vec4 texture = texture2D(texture, vUv);
+  // ===== искажения =====
+  float m = u_mouse.x / u_resolution.x;
+
+  float distort = sin(vUv.y * 100.0 + u_time) * 0.0015 + m * 0.3;
+
+  float map = texture2D(map, vUv).r;
+  vec4 texture = texture2D(texture, vec2(vUv.x + distort*map, vUv.y));
 
   // gl_FragColor = vec4( vec3(1.0, 0.0, 1.0), 1.0);
-  gl_FragColor = texture;
+
+  // ===== чернобелое изображение =====
+  // gl_FragColor = vec4(vec3(texture.r * 0.2126 + texture.g * 0.7152+ texture.g * 0.0722), 1.0);
+
+  gl_FragColor = vec4(texture.rgb, 1.0)
 }
